@@ -1,0 +1,2 @@
+MainPackage=F:\TVWP\TVWP\bin\x86\Release\TVWP_1.1.0.0_x86.appx
+SymbolPackage=F:\TVWP\TVWP\AppPackages\TVWP_1.1.0.0_Test\TVWP_1.1.0.0_x86.appxsym
