@@ -9,18 +9,18 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TVWP</RootNamespace>
     <AssemblyName>TVWP</AssemblyName>
-    <DefaultLanguage>zh-Hant</DefaultLanguage>
+    <DefaultLanguage>en-us</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>TVWP_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <PackageCertificateKeyFile>TVWP_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>17D107C46DD8ABA51A6C322BA7BDA56393822108</PackageCertificateThumbprint>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>E11EA354CB45A92625241102ED1003F2970FDAFB</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -109,16 +109,32 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\Data.cs" />
+    <Compile Include="Class\DownloadPage.cs" />
     <Compile Include="Class\FileManage.cs" />
+    <Compile Include="Class\Login.cs" />
     <Compile Include="Class\Main.cs" />
+    <Compile Include="Class\Home_m.cs" />
+    <Compile Include="Class\PartialNav.cs" />
     <Compile Include="Class\NavPage.cs" />
+    <Compile Include="Class\NetClass.cs" />
+    <Compile Include="Class\OriginalPage.cs" />
+    <Compile Include="Class\ParseData.cs" />
     <Compile Include="Class\Player.cs" />
+    <Compile Include="Class\ScrollA.cs" />
+    <Compile Include="Class\ScrollB.cs" />
     <Compile Include="Class\SearchResult.cs" />
-    <Compile Include="Class\Setting.cs" />
+    <Compile Include="Class\SettingPage.cs" />
     <Compile Include="Class\StructSource.cs" />
     <Compile Include="Class\Timer.cs" />
-    <Compile Include="Class\VideoView.cs" />
+    <Compile Include="Class\VideoAddress.cs" />
+    <Compile Include="Class\VideoViewEx.cs" />
     <Compile Include="Class\WebClass.cs" />
+    <Compile Include="Control\ListBoxH.xaml.cs">
+      <DependentUpon>ListBoxH.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ListViewG.xaml.cs">
+      <DependentUpon>ListViewG.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -132,11 +148,23 @@
     <None Include="TVWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Square310x310Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
-    <None Include="Package.StoreAssociation.xml" />
+    <None Include="Package.StoreAssociation.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Pic\am64.png" />
+    <Content Include="Pic\ani64.png" />
+    <Content Include="Pic\car64.png" />
+    <Content Include="Pic\doc64.png" />
+    <Content Include="Pic\fun64.png" />
+    <Content Include="Pic\gam64.png" />
+    <Content Include="Pic\mov64.png" />
+    <Content Include="Pic\new64.png" />
+    <Content Include="Pic\spo64.png" />
+    <Content Include="Pic\tv64.png" />
     <Content Include="Pic\User.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
@@ -149,12 +177,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Control\ListBoxH.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\ListViewG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

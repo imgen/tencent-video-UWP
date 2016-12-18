@@ -4,10 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace TVWP.Class
 {
@@ -92,39 +96,41 @@ namespace TVWP.Class
             fs.Dispose();
             temp.Dispose();
         }
-        public static void LoadDisposeFile()
+        public static byte[] LoadFile(string name)
         {
             IsolatedStorageFile temp = IsolatedStorageFile.GetUserStoreForApplication();
             IsolatedStorageFileStream fs;
-            if (temp.FileExists("vs"))
+            if (temp.FileExists(name))
             {
-                fs = temp.OpenFile("vs", FileMode.Open);
+                fs = temp.OpenFile(name, FileMode.Open);
                 byte[] b = new byte[fs.Length];
                 fs.Read(b,0,b.Length);
-                //ReadGood(AES_Decrypt(b,cypher));
+                //b= AES_Decrypt(b,cypher);
+                fs.Dispose();
+                temp.Dispose();
+                return b;
             }                
+            temp.Dispose();
+            return null;
+        }
+        public static void SaveFile(byte[] buff,string name)
+        {
+            IsolatedStorageFile temp = IsolatedStorageFile.GetUserStoreForApplication();
+            IsolatedStorageFileStream fs;
+            if (temp.FileExists(name))
+                fs = temp.OpenFile(name, FileMode.OpenOrCreate);
             else
-            {
-                fs = temp.CreateFile("vs");
-                //fs.Write(b,0,b.Length);
-            } 
+                fs = temp.CreateFile(name);
+            //buff = AES_Encrypt(buff, cypher);
+            fs.Write(buff,0,buff.Length);
             fs.Dispose();
             temp.Dispose();
         }
-        public static void SaveDisposeFile()
+        public static void DeleteFile(string name)
         {
             IsolatedStorageFile temp = IsolatedStorageFile.GetUserStoreForApplication();
-            IsolatedStorageFileStream fs;
-            if (temp.FileExists("vs"))
-                fs = temp.OpenFile("vs", FileMode.OpenOrCreate);
-            else
-                fs = temp.CreateFile("vs");
-            byte[] b = new byte[2400];
-            //GoodsToByte(ref b);
-            b = AES_Encrypt(b, cypher);
-            fs.Write(b,0,b.Length);
-            fs.Dispose();
-            temp.Dispose();
+            if (temp.FileExists(name))
+                temp.DeleteFile(name);
         }
         #endregion
     }

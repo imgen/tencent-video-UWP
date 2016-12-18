@@ -1,2 +1,2 @@
-MainPackage=F:\TVWP\TVWP\bin\ARM\Release\TVWP_1.1.0.0_ARM.appx
-SymbolPackage=F:\TVWP\TVWP\AppPackages\TVWP_1.1.0.0_Test\TVWP_1.1.0.0_ARM.appxsym
+MainPackage=F:\TVWP\TVWP\bin\ARM\Release\TVWP_1.1.13.0_ARM.appx
+SymbolPackage=F:\TVWP\TVWP\AppPackages\TVWP_1.1.13.0_Test\TVWP_1.1.13.0_ARM.appxsym

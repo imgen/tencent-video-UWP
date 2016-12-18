@@ -1,8 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Networking.Sockets;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -15,12 +26,61 @@ namespace TVWP
     {
         public MainPage()
         {
+            Task.Run(() => { Class.WebClass.Initial(); });
             InitializeComponent();
 #if phone
-            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            //StatusBar.GetForCurrentView().BackgroundColor = Colors.Black;
+            StatusBar s = StatusBar.GetForCurrentView();
+            s.BackgroundOpacity = 1;
+            s.ForegroundColor = Colors.White;
 #endif
+#if DEBUG
+            Application.Current.UnhandledException += (o, e) => {
+                Debug.WriteLine(e.Exception.StackTrace);
+            };
+#endif
+            Application.Current.Suspending += (o, e) => {
+                Class.Setting.SaveDispose();
+                Class.DownLoad.SaveMission(null);
+            };
+            Class.Setting.LoadDispose();
+            Class.Component.Initail();
             Class.Main.Initial(main);
-            //Debug.WriteLine( Uri.UnescapeDataString("http://v.qq.com/x/search/?ses=qid%3DdONGcy3g-hAMiTqN4ONQ4avmAGKrGb0IrTOPIn6mvZmj2c_9TilhDA%26last_query%3D%E7%BE%8E%E5%9B%BD%E9%98%9F%E9%95%BF3%26tabid_list%3D0%7C3%7C7%26tabname_list%3D%E5%85%A8%E9%83%A8%7C%E7%BB%BC%E8%89%BA%7C%E5%85%B6%E4%BB%96&q=%E7%BE%8E%E5%9B%BD%E9%98%9F%E9%95%BF3&stag=4&filter=sort%3D2%26pubfilter%3D0%26duration%3D1%26tabid%3D0"));
+            //Application.Current.EnteredBackground += (o, e) =>
+            //{
+            //    Debug.WriteLine("true");
+            //}
+            //ContentDialog cd = new ContentDialog();
+            //await cd.ShowAsync();
+            // MessageDialog
+
+            //RegisterLiveTileTask();
+            //string value = "\u65b0A\u7586\u548c\u7530\u5e02\u957f\u963f\u8fea\u529b-\u52aa\u5c14\u4e70\u4e70\u63d0\u6d89\u4e25\u91cd\u8fdd\u7eaa\u88ab\u67e5";
+            //Debug.WriteLine(Uri.UnescapeDataString(value));//
+        }
+        bool reg=false;
+        private  void RegisterLiveTileTask()
+        {
+            //foreach (var task in BackgroundTaskRegistration.AllTasks)
+            //{
+            //    if (task.Value.Name == "BackTask")
+            //    {
+            //        //task.Value.Unregister(true);
+            //        reg = true;
+            //        break;
+            //    }
+            //}
+            //if (!reg)
+            //{
+            //    var builder = new BackgroundTaskBuilder();
+            //    builder.Name = "BackTask";
+            //    builder.TaskEntryPoint = typeof(BackTask.DownLoad).FullName;
+            //    var tri = new TimeTrigger(15, false);
+            //    builder.SetTrigger(tri);
+            //    BackgroundTaskRegistration task = builder.Register();
+            //    task.Progress += (o, e) => { };
+            //    task.Completed += (o, e) => { };
+            //}
         }
     }
 }
